@@ -56,7 +56,11 @@ def convert(file_path, output_path):
 
         for line in md:
             if(re.search(r"!\[[^]]*\].*",line)):  
-                raw_img_path = re.search(r"(?<=\()[^\)]*",line).group().replace("\\","/") 
+                img_sents = re.findall(r'!\[[^[\]]*\]\(.+\)$',line.strip())
+                for img_sent in img_sents:
+                        start_index = img_sent.find('](')
+                        end_index = img_sent.rfind(')')
+                        raw_img_path = img_sent[start_index+2:end_index]
                 raw_img_path = parse.unquote(raw_img_path)
                 
                 if not(re.match("data",raw_img_path) or re.match("http",raw_img_path)): 
