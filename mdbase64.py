@@ -112,6 +112,9 @@ if __name__=="__main__":
     else:
         print("output_path is exist\n\n")
 
-    files = get_all_md_files(work_path)
-    for file in files:
-        convert(file, output_path)
+    if os.path.isdir(work_path):
+        files = get_all_md_files(work_path)
+        for file in files:
+            convert(file, output_path)
+    elif os.path.isfile(work_path):
+        convert(work_path, output_path)
