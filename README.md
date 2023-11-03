@@ -2,7 +2,7 @@
 Convert markdown files with extra images (local or web images) to single base64-embedded markdown files
 
 # Introduction
-Although markdown is a convenient text format, it has some aspects I don't like，especially handling images.
+Although markdown is a convenient text format, it has some aspects I don't like, especially handling images.
 
 As you know, markdown can insert an image by referencing its local path or URL.
 
@@ -27,6 +27,7 @@ You just need to run `mdbase64.py` on Windows or Linux with two parameters, i.e.
 
 ## Example
 markdown files location: D:\notebook
+
 output location: D:\output
 
 ```
