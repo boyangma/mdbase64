@@ -19,11 +19,9 @@ def web_img_base64(url):
     img_base64 = base64.b64encode(buffered.getvalue()) 
     return str(img_base64)[2:-1]
 
-
 def get_size(file):
     size = os.path.getsize(file)
     return size / 1024
-
 
 def get_all_md_files(path):
     files = []
@@ -36,7 +34,6 @@ def get_all_md_files(path):
          print(file)
     print("\n\n\n")
     return files
-
 
 def convert(file_path, output_path):
     file_path = file_path
@@ -53,17 +50,13 @@ def convert(file_path, output_path):
         file_path = eval(file_path)
 
     with open(file_path,"r",encoding="utf-8") as md:
-
-
         pic_num = 0  
         base64_pic_quote_list = []
-
         transformed = open(output_path + os.path.sep + filename,"w",encoding="utf-8") 
 
         for line in md:
             if(re.search(r"!\[[^]]*\].*",line)):  
                 raw_img_path = re.search(r"(?<=\()[^\)]*",line).group().replace("\\","/") 
-
                 raw_img_path = parse.unquote(raw_img_path)
 
                 if not(re.match("data",raw_img_path) or re.match("http",raw_img_path)): 
@@ -101,8 +94,6 @@ def convert(file_path, output_path):
 
 
 if __name__=="__main__":
-
-
     if len(sys.argv) > 2:
         work_path = sys.argv[1]
         output_path = sys.argv[2]
@@ -122,4 +113,3 @@ if __name__=="__main__":
     files = get_all_md_files(work_path)
     for file in files:
         convert(file, output_path)
-    
