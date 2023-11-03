@@ -12,7 +12,7 @@ Obviously, it is a terrible disaster if you use the markdown as your notebook fo
 
 Fortunately, we can embed an image to the '.md' file by converting it to base64 string.
 
-Although the size of the '.md' file will be huge than normal markdown files, it is worth to do this for safety of your note data.
+Although the size of the '.md' file will be huge than normal markdown files, it is worth to do this for your note data safety.
 
 On the other hand, there is not any bottleneck of performance for today's computer to open a large markdown file. 
 
