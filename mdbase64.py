@@ -36,19 +36,18 @@ def get_all_md_files(path):
     return files
 
 def convert(file_path, output_path):
-    file_path = file_path
-    filename = os.path.basename(file_path)
-    dirname = os.path.dirname(file_path)
-
-    print("Processing the file:")
-    print("filename: ", filename)
-    print("dir: ", dirname)
-    print("\n\n")
-
     file_path = file_path.replace("\\","/")
     if '"' in file_path:
         file_path = eval(file_path)
 
+    filename = os.path.basename(file_path)
+    dirname = os.path.dirname(file_path)
+    print("Processing the file:")
+    print(file_path)
+    print("filename: ", filename)
+    print("dir: ", dirname)
+    print("\n\n")
+    
     with open(file_path,"r",encoding="utf-8") as md:
         pic_num = 0  
         base64_pic_quote_list = []
@@ -57,6 +56,7 @@ def convert(file_path, output_path):
         for line in md:
             if(re.search(r"!\[[^]]*\].*",line)):  
                 img_sents = re.findall(r'!\[[^[\]]*\]\(.+\)$',line.strip())
+                #print("img_sents: ",img_sents)
                 for img_sent in img_sents:
                         start_index = img_sent.find('](')
                         end_index = img_sent.rfind(')')
@@ -70,10 +70,9 @@ def convert(file_path, output_path):
                     pic_num_str = "Fig" + str(pic_num)  
                     pic_new_quote = "![" + pic_name + "][" + pic_num_str + "]" 
                     line = re.sub(r"!\[[^]]*\]\([^)]*\)",pic_new_quote,line)  
-                    raw_ima_absolute_path = os.path.join(dirname, raw_img_path)
+                    raw_ima_absolute_path = os.path.join(dirname, raw_img_path).replace("\\","/") 
                     base64_pic_quote = "[" + pic_num_str + "]:data:image/png;base64," + local_img_base64(raw_ima_absolute_path) 
-                    base64_pic_quote_list.append(base64_pic_quote)
-                    
+                    base64_pic_quote_list.append(base64_pic_quote)                  
                 elif(re.match("http",raw_img_path)):
                     print("find web image: ",raw_img_path)
                     pic_num = pic_num + 1
@@ -83,8 +82,7 @@ def convert(file_path, output_path):
                     line = re.sub(r"!\[[^]]*\]\([^)]*\)",pic_new_quote,line)  
                     base64_pic_quote = "[" + pic_num_str + "]:data:image/png;base64," + web_img_base64(raw_img_path)                
                     base64_pic_quote_list.append(base64_pic_quote)
-                    
-                    
+                           
             transformed.write(line) 
 
         for i in range(1,30):
