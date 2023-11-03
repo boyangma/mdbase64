@@ -30,6 +30,4 @@ The converted markdown files will be created in `D:\output`
 
 <br>
 <br>
-<br>
-<br>
 Enjoy it!
