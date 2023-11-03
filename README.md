@@ -15,7 +15,9 @@ So, I write a useful Python script to convert your markdown file(s) to image-emb
 
 # Usage
 You just need to run `mdbase64.py` on Windows or Linux with two parameters, i.e., `work path` and `output path`.
+
 ** Note: ** Don't forget the double quotation marks.
+
 ## Example
 markdown files location: D:\notebook
 output location: D:\output
