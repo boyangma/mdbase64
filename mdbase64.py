@@ -32,7 +32,7 @@ def get_all_md_files(path):
     print("Find following md files: ")
     for file in files:
          print(file)
-    print("\n\n\n")
+    print("\n")
     return files
 
 def convert(file_path, output_path):
@@ -46,7 +46,7 @@ def convert(file_path, output_path):
     print(file_path)
     print("filename: ", filename)
     print("dir: ", dirname)
-    print("\n\n")
+    print("\n")
     
     with open(file_path,"r",encoding="utf-8") as md:
         pic_num = 0  
@@ -93,7 +93,7 @@ def convert(file_path, output_path):
             transformed.write("\n")
         
         transformed.close()
-        print("\n\n")
+        print("\n")
 
 if __name__=="__main__":
     if len(sys.argv) > 2:
@@ -116,5 +116,7 @@ if __name__=="__main__":
         files = get_all_md_files(work_path)
         for file in files:
             convert(file, output_path)
+        print("Done!\n\n")
     elif os.path.isfile(work_path):
         convert(work_path, output_path)
+        print("Done!\n\n")
