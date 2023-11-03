@@ -58,18 +58,15 @@ def convert(file_path, output_path):
             if(re.search(r"!\[[^]]*\].*",line)):  
                 raw_img_path = re.search(r"(?<=\()[^\)]*",line).group().replace("\\","/") 
                 raw_img_path = parse.unquote(raw_img_path)
-
                 if not(re.match("data",raw_img_path) or re.match("http",raw_img_path)): 
                     print("find local image: ",raw_img_path)
                     pic_num = pic_num + 1
                     pic_name = re.search(r"\[.*?\]",line).group()[1:-1]
                     pic_num_str = "Fig" + str(pic_num)  
                     pic_new_quote = "![" + pic_name + "][" + pic_num_str + "]" 
-
                     line = re.sub(r"!\[[^]]*\]\([^)]*\)",pic_new_quote,line)  
                     base64_pic_quote = "[" + pic_num_str + "]:data:image/png;base64," + local_img_base64(raw_img_path) 
                     base64_pic_quote_list.append(base64_pic_quote)
-                    
                 elif(re.match("http",raw_img_path)):
                     print("find web image: ",raw_img_path)
                     pic_num = pic_num + 1
@@ -91,7 +88,6 @@ def convert(file_path, output_path):
         
         transformed.close()
         print("\n\n")
-
 
 if __name__=="__main__":
     if len(sys.argv) > 2:
